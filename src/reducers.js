@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 
 const resultReducer = (results = [], action) => {
-  if (action.type === "CREATE_MATCH") {
-    return action.payload;
+  if (action.type === "SAVE_MATCH") {
+    return [...results, action.payload];
   }
   return results;
 };
