@@ -25,3 +25,6 @@ In the project directory, you can run:
 
 Setup [Redux Persist](https://www.npmjs.com/package/redux-persist#basic-usage) to use redux store as a 'Data Base'.
 
+### Resources
+
+This project was cloned and implemented using this [project](https://github.com/codeSTACKr/react-tic-tac-toe-hooks) as base.
