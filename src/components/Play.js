@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Board from "./Board";
-import Winner from "./Winner";
+import { connect, useDispatch } from "react-redux";
+import { createMatch } from "../action.js";
 import { calculateWinner } from "../helper";
 
-const Play = () => {
+const Play = ({ results }) => {
   const [players, setPlayers] = useState({
     player1: { name: "player1", symbol: "X" },
     player2: { name: "player2", symbol: "O" },
@@ -13,7 +14,7 @@ const Play = () => {
   const [xIsNext, setXisNext] = useState(true);
   const winner = calculateWinner(history[stepNumber]);
   const xO = xIsNext ? players.player1 : players.player2;
-
+  const dispatch = useDispatch();;
   const handleClick = (i) => {
     const historyPoint = history.slice(0, stepNumber + 1);
     const current = historyPoint[stepNumber];
@@ -26,6 +27,10 @@ const Play = () => {
     setStepNumber(historyPoint.length);
     setXisNext(!xIsNext);
   };
+  const saveMatch = (winner) => {
+    console.log(winner)
+    dispatch(createMatch(players, winner))
+  }
 
   return (
     <div className="container py-4">
@@ -69,7 +74,16 @@ const Play = () => {
       <Board squares={history[stepNumber]} onClick={handleClick} />
       <div>
         {winner ? (
-          <Winner winner={winner} players={players} />
+          <div className="row justify-content-around align-items-center">
+            Winner: {winner}
+            <button
+              onClick={() => saveMatch(winner)}
+              className="btn btn-primary"
+            >
+              Save &amp; Start new
+            </button>
+            <button className="btn btn-primary">Results</button>
+          </div>
         ) : (
           <p>Next Player: {xO.name}</p>
         )}
@@ -77,4 +91,9 @@ const Play = () => {
     </div>
   );
 };
-export default Play;
+
+const mapStateToProps = (state) => {
+  console.log(state)
+  return { results: state.results };
+};
+export default connect(mapStateToProps)(Play);
