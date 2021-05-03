@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 const Results = ({ results }) => {
-  console.log(results);
   const renderedResults = results.map((result, i) => {
     return (
       <li style={{ listStyleType: "none" }} key={i}>
