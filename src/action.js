@@ -33,10 +33,3 @@ export const setBoardHistory = (boardHistory) => {
     payload: boardHistory,
   };
 };
-
-export const getWinner = (winner) => {
-  return {
-    type: "GET_WINNER",
-    payload: winner,
-  };
-};

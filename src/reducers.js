@@ -36,6 +36,8 @@ const stepNumberReducer = (stepNumber = 0, action) => {
 const boardHistoryReducer = (boardHistory = [Array(9).fill(null)], action) => {
   if (action.type === "SET_BOARD_HISTORY") {
     return action.payload;
+  } else if (action.type === "CLEAR_BOARD") {
+    return action.payload;
   }
   return boardHistory;
 };

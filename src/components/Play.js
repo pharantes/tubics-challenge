@@ -24,8 +24,6 @@ const Play = ({ players, status, stepNumber, boardHistory }) => {
 
   return (
     <div className="container py-4">
-      <h1>React Tic Tac Toe - With Hooks</h1>
-      <hr />
       <Players />
       <Board squares={boardHistory[stepNumber]} onClick={handleClick} />
       <MatchStatus winner={winner} />

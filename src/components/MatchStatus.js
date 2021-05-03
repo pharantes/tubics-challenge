@@ -1,11 +1,13 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
 import { saveMatch } from "../action";
+
 const MatchStatus = ({ players, winner, status }) => {
   const dispatch = useDispatch();
 
   const saveCurrentMatch = (winner) => {
     dispatch(saveMatch(players, winner));
+    window.location.reload(false);
   };
 
   return (
@@ -34,6 +36,7 @@ const mapStateToProps = (state) => {
   return {
     players: state.players,
     status: state.status,
+    boardHistory: state.boardHistory,
   };
 };
 export default connect(mapStateToProps)(MatchStatus);
