@@ -1,27 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect, useDispatch } from "react-redux";
-import { setNext } from "../action";
+import { setBoardHistory, setNext, setStepNumber, getWinner } from "../action";
 import { calculateWinner } from "../helper";
 import Board from "./Board";
 import MatchStatus from "./MatchStatus.js";
 import Players from "./Players";
 
-const Play = ({ players, status }) => {
+const Play = ({ players, status, stepNumber, boardHistory, winner }) => {
   const dispatch = useDispatch();
-  const [history, setHistory] = useState([Array(9).fill(null)]);
-  const [stepNumber, setStepNumber] = useState(0);
-  const winner = calculateWinner(history[stepNumber]);
-
+  const _winner = calculateWinner(boardHistory[stepNumber]);
+  dispatch(getWinner(_winner));
   const handleClick = (i) => {
-    const historyPoint = history.slice(0, stepNumber + 1);
+    const historyPoint = boardHistory.slice(0, stepNumber + 1);
     const current = historyPoint[stepNumber];
     const squares = [...current];
     // return if won or occupied
     if (winner || squares[i]) return;
     // select square
     squares[i] = status ? players.player1 : players.player2;
-    setHistory([...historyPoint, squares]);
-    setStepNumber(historyPoint.length);
+    dispatch(setBoardHistory([...historyPoint, squares]));
+    dispatch(setStepNumber(historyPoint.length));
     dispatch(setNext(!status));
   };
 
@@ -30,8 +28,8 @@ const Play = ({ players, status }) => {
       <h1>React Tic Tac Toe - With Hooks</h1>
       <hr />
       <Players />
-      <Board squares={history[stepNumber]} onClick={handleClick} />
-      <MatchStatus  winner={winner} />
+      <Board squares={boardHistory[stepNumber]} onClick={handleClick} />
+      <MatchStatus winner={winner} />
     </div>
   );
 };
@@ -39,9 +37,11 @@ const Play = ({ players, status }) => {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    results: state.results,
     players: state.players,
     status: state.status,
+    stepNumber: state.stepNumber,
+    boardHistory: state.boardHistory,
+    winner: state.winner,
   };
 };
 export default connect(mapStateToProps)(Play);

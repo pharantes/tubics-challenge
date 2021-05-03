@@ -26,9 +26,33 @@ const matchStatusReducer = (status = true, action) => {
   }
   return status;
 };
+const stepNumberReducer = (stepNumber = 0, action) => {
+  if (action.type === "SET_STEP_NUMBER") {
+    return action.payload;
+  }
+  return stepNumber;
+};
+
+const boardHistoryReducer = (boardHistory = [Array(9).fill(null)], action) => {
+  if (action.type === "SET_BOARD_HISTORY") {
+    return action.payload;
+  }
+  return boardHistory;
+};
+
+const winnerReducer = (winner = null, action) => {
+  if (action.type === "GET_WINNER") {
+    return action.payload;
+  }
+  return winner;
+};
+
 
 export default combineReducers({
   results: resultReducer,
   players: playersReducer,
   status: matchStatusReducer,
+  stepNumber: stepNumberReducer,
+  boardHistory: boardHistoryReducer,
+  winner: winnerReducer,
 });
