@@ -1,15 +1,14 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
-import { setBoardHistory, setNext, setStepNumber, getWinner } from "../action";
+import { setBoardHistory, setNext, setStepNumber } from "../action";
 import { calculateWinner } from "../helper";
 import Board from "./Board";
 import MatchStatus from "./MatchStatus.js";
 import Players from "./Players";
 
-const Play = ({ players, status, stepNumber, boardHistory, winner }) => {
+const Play = ({ players, status, stepNumber, boardHistory }) => {
   const dispatch = useDispatch();
-  const _winner = calculateWinner(boardHistory[stepNumber]);
-  dispatch(getWinner(_winner));
+  const winner = calculateWinner(boardHistory[stepNumber]);
   const handleClick = (i) => {
     const historyPoint = boardHistory.slice(0, stepNumber + 1);
     const current = historyPoint[stepNumber];
@@ -35,13 +34,11 @@ const Play = ({ players, status, stepNumber, boardHistory, winner }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     players: state.players,
     status: state.status,
     stepNumber: state.stepNumber,
     boardHistory: state.boardHistory,
-    winner: state.winner,
   };
 };
 export default connect(mapStateToProps)(Play);

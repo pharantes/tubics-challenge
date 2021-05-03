@@ -40,19 +40,10 @@ const boardHistoryReducer = (boardHistory = [Array(9).fill(null)], action) => {
   return boardHistory;
 };
 
-const winnerReducer = (winner = null, action) => {
-  if (action.type === "GET_WINNER") {
-    return action.payload;
-  }
-  return winner;
-};
-
-
 export default combineReducers({
   results: resultReducer,
   players: playersReducer,
   status: matchStatusReducer,
   stepNumber: stepNumberReducer,
   boardHistory: boardHistoryReducer,
-  winner: winnerReducer,
 });
