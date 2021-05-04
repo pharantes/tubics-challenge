@@ -20,6 +20,9 @@ In the project directory, you can run:
 
 [React-Redux-TicTacToe](https://tubics-challenge.vercel.app)
 
+## Screenshot
+
+![screenshot](https://github.com/pharantes/tubics-challenge/blob/master/screenshot.png?raw=true)
 
 ## Improvements to do:
 
