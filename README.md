@@ -21,9 +21,10 @@ In the project directory, you can run:
 [React-Redux-TicTacToe](https://tubics-challenge.vercel.app)
 
 
-## Todo:
+## Improvements to do:
 
 Setup [Redux Persist](https://www.npmjs.com/package/redux-persist#basic-usage) to use redux store as a 'Data Base'.
+Implement [Minimax Algorithm](https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/) to enable single player mode.
 
 ### Resources
 
